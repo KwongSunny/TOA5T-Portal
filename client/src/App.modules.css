@@ -36,3 +36,31 @@
     transform: rotate(360deg);
   }
 }
+
+.serversAndProperties{
+  min-width: 800px;
+  max-width: 1400px;
+  width: 80%;
+  border: solid 1px red;
+  display: grid;
+  grid-template-columns: 20% 80%;
+}
+
+.server {
+  background: gray;
+  padding: 20px 8px;
+  margin-top: 4px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.serverProperties{
+  background: gray;
+  margin: 4px;
+  border-radius: 10px;
+}
+
+.serverPropertyTabs span{
+  margin: 0px 10px;
+  cursor: pointer;
+}
