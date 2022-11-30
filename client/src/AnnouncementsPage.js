@@ -6,8 +6,8 @@ function AnnouncementsPage() {
 
     const mockAnnouncements =
         [
-            { announcementName: "Monthly Reminder", content: "End of the month reminder" },
-            { announcementName: "Weekly Reminder", content: "End of the week reminder" },
+            { announcementName: "Monthly Reminder", content: "End of the month reminder", id: "1" },
+            { announcementName: "Weekly Reminder", content: "End of the week reminder", id: "2" },
         ];
 
     return (
@@ -24,7 +24,7 @@ function AnnouncementsPage() {
                 <span>Active</span>
             </div>
             <div className='announcementList'>
-                {mockAnnouncements.map(announcement => <div><AnnouncementToggle announcement = {announcement}/></div>)}
+                {mockAnnouncements.map(announcement => <div key = {announcement.id}><AnnouncementToggle announcement = {announcement}/></div>)}
             </div>
         </div>
     )

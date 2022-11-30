@@ -44,6 +44,7 @@
   border: solid 1px red;
   display: grid;
   grid-template-columns: 20% 80%;
+  margin: auto;
 }
 
 .server {
