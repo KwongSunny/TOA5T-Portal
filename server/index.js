@@ -21,12 +21,12 @@ client.guilds.fetch().then(guilds => {
   const toastGuilds = [];
 
   for(guild of guilds){
-    toastGuilds.push(guild[1]);
+    toastGuilds.push(guild[1].id);
   }
 
   app.get("/toastGuilds", (req, res) => {
     //needs to send guilds to front end
-
+    res.json({toastGuilds})
   })
 });
 
