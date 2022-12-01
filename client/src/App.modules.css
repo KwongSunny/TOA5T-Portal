@@ -48,7 +48,7 @@
 }
 
 .server {
-  background: gray;
+  background: darkgray;
   padding: 20px 8px;
   margin-top: 4px;
   border-radius: 10px;
@@ -56,7 +56,7 @@
 }
 
 .serverProperties{
-  background: gray;
+  background: darkgray;
   margin: 4px;
   border-radius: 10px;
 }

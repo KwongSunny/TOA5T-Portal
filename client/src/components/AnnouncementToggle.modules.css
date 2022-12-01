@@ -2,5 +2,23 @@
     cursor: pointer;
     display:grid;
     grid-template-columns: 20% 10% 40% 20% 10%;
-    
+    padding: 12px 0px;
+}
+
+.ToggleCollapsed span{
+    overflow: hidden;
+}
+
+.ToggleExpanded{
+    padding: 12px;
+    background-color: gray;
+}
+
+.AnnouncementToggle{
+    border-top: solid black 2px;
+}
+
+.NewRuleTemplate{
+    display:grid;
+    grid-template-columns: 10% 10% 10% 10% 40% 20%;
 }
