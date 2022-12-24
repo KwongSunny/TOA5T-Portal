@@ -25,9 +25,13 @@ client.guilds.fetch().then(guilds => {
   }
 
   app.get("/toastGuilds", (req, res) => {
-    //needs to send guilds to front end
-    res.json({toastGuilds})
+    res.json({guilds: toastGuilds})
   })
+  
+  app.get("/toastGuilds/:guildId", (req, res) => {
+    res.json(client.guilds.cache.get(req.params.guildId))
+  })
+
 });
 
 app.get("/api", (req, res) => {
