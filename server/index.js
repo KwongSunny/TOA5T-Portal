@@ -24,8 +24,18 @@ client.guilds.fetch().then(guilds => {
     toastGuilds.push(guild[1].id);
   }
 
+  //return guilds that Toa5t is apart of, and that the user is an admin of
   app.get("/toastGuilds", (req, res) => {
-    res.json({guilds: toastGuilds})
+    let userGuilds = [];
+    if(req.query.userGuilds){
+      userGuilds = [...req.query.userGuilds];
+
+      for(let i = toastGuilds.length-1; i > -1; i--){
+        if(!userGuilds.find(element => element === toastGuilds[i])) toastGuilds.splice(i,1);
+      }
+      
+    }
+    res.json({guilds: toastGuilds});
   })
   
   app.get("/toastGuilds/:guildId", (req, res) => {

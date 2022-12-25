@@ -20,13 +20,6 @@ function App() {
     const [accessToken, tokenType] = [fragment.get('access_token'), fragment.get('token_type')];
     setToken(accessToken);
     setTokenType(tokenType);
-
-    fetch('/toastGuilds')
-      .then(res => res.json())
-      .then(data => {
-        console.log("fetch /toastguilds: ", data.guilds);
-        setToastGuilds(data.guilds)})
-
   }, [])
 
   useEffect(() => {
@@ -38,10 +31,25 @@ function App() {
         }
       }).then(res => res.json())
       .then(data => {
-        setUserGuilds(data)
+
+        let adminGuilds = [];
+        data.map(guild => {if(guild.permissions === "4398046511103") adminGuilds.push(guild)})
+        setUserGuilds(adminGuilds)
       })
     }
   },[token])
+
+  useEffect(() => {
+    let searchParams = new URLSearchParams();
+    userGuilds?.map(guild => {searchParams.append("userGuilds", guild.id)})
+
+    //fetch ONLY guilds from Toast that the user is an admin of
+    fetch('/toastGuilds?' + searchParams)
+      .then(res => res.json())
+      .then(data => {
+        console.log("fetch /toastguilds: ", data.guilds);
+        setToastGuilds(data.guilds)})
+  },[userGuilds])
 
   return (
     <div className="App">
@@ -53,11 +61,13 @@ function App() {
         : 
         <div className='serversAndProperties'>
           <div className='servers'>
-            {userGuilds?.map(guild => {
-              //only list guilds in which the user is an admin of and TOA5T is in.
-              if(guild.permissions === "4398046511103" && toastGuilds?.includes(guild.id))
-                return <div className='server' key = {guild.id} onClick={() => setCurrentGuild(guild)}>{guild.name}</div>
-            })}
+            {userGuilds?.map(guild => 
+              {
+                //only list guilds in which the user is an admin of and TOA5T is in.
+                if(toastGuilds?.includes(guild.id))
+                  return <div className='server' key = {guild.id} onClick={() => setCurrentGuild(guild)}>{guild.name}</div>
+              }
+            )}
           </div>
           <div className='serverProperties'>
             <h3>{currentGuild?.name}</h3>
