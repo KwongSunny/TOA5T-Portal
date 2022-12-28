@@ -33,7 +33,6 @@ client.guilds.fetch().then(guilds => {
       for(let i = toastGuilds.length-1; i > -1; i--){
         if(!userGuilds.find(element => element === toastGuilds[i])) toastGuilds.splice(i,1);
       }
-      
     }
     res.json({guilds: toastGuilds});
   })
@@ -43,6 +42,34 @@ client.guilds.fetch().then(guilds => {
   })
 
 });
+
+app.get("/toastChannels/:channelId", (req, res) => {
+  const response = {
+    channelData: client.channels.cache.get(req.params.channelId),
+    channelType: client.channels.cache.get(req.params.channelId).type
+  }
+  res.json(response)
+})
+
+//retrieves message by message id and channel id
+app.get("/toastChannels/:channelId/:messageId", (req, res) => {
+  const {channelId, messageId} = req.params;
+
+  client.channels.fetch(channelId).then(channel => {
+    if(channel.isTextBased() && messageId)
+      channel.messages.fetch(messageId).then(message => res.json(message));
+  });
+  // res.json(data)
+})
+
+app.get("/toastUsers/:userId", (req, res) => {
+  const {userId} = req.params;
+
+  client.users.fetch(userId).then(user => {
+    res.json(user);
+  })
+})
+
 
 app.get("/api", (req, res) => {
   res.json({ message: "TEST" });

@@ -47,9 +47,10 @@ function App() {
     fetch('/toastGuilds?' + searchParams)
       .then(res => res.json())
       .then(data => {
-        console.log("fetch /toastguilds: ", data.guilds);
         setToastGuilds(data.guilds)})
   },[userGuilds])
+
+  useEffect(() => {setCurrentPage("general")}, [currentGuild])
 
   return (
     <div className="App">
